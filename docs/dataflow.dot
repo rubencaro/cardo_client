@@ -1,0 +1,58 @@
+# https://gist.github.com/rubencaro/75e7b163665b47e0094a
+
+digraph DataFlow {
+  rankdir=LR
+  label="Data Flow on Cardo Client"
+  fontsize=16
+  node[fontsize=16, shape=record]
+  edge[fontsize=14]
+
+  server[label="Cardo Server", shape=rect]
+
+  subgraph cluster_ws2store {
+    label="WS connector to Vuex Store"
+    dispatch [label="Dispatch incoming messages\n
+    to the corresponding mutations."]
+    send [label="Serialize each change\n
+    based on its origin."]
+  }
+
+  subgraph cluster_store {
+    label="Vuex Store"
+    current_list[label="Current list"]
+    current_card[label="Current card"]
+    search_params[label="Search params"]
+    user [label="User data"]
+  }
+
+  subgraph cluster_form {
+    label="Card Form Component"
+    edit_card[label="Allow the user to\n edit current card"]
+    show_card[label="Fill in the form with\n data from current card"]
+  }
+
+  subgraph cluster_list {
+    label="Card List Component"
+    show_list[label="Show cards from\n the current list"]
+    select_current_card[label="Allow the user to\n select current card"]
+  }
+
+  subgraph cluster_search {
+    label="Search Form Component"
+    search[label="Allow the user to\n edit search params"]
+    show_search_params[label="Show current search params"]
+  }
+
+  server -> dispatch
+  send -> server
+
+  edit_card, select_current_card -> current_card [label="mutates"]
+  search_params -> search [dir=back,label="mutates"]
+  dispatch -> current_card, current_list [label="mutates"]
+
+  current_card -> show_card [label="updates"]
+  current_list -> show_list [label="updates"]
+  search_params -> show_search_params [label="updates"]
+
+  current_card, search_params -> send [label="fires"]
+}
