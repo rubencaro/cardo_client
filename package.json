@@ -1,26 +1,42 @@
 {
-  "main": "../priv/static/app.js",
+  "name": "cardo_client",
+  "version": "0.1.0",
+  "description": "A Vuejs Cardo client",
+  "main": "public/app.js",
   "scripts": {
     "build": "node_modules/brunch/bin/brunch b",
     "watch": "node_modules/brunch/bin/brunch w",
-    "serve": "node_modules/brunch/bin/brunch w --server"
+    "serve": "node_modules/brunch/bin/brunch w --server",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rubencaro/cardo_client.git"
+  },
+  "author": "rubencaro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rubencaro/cardo_client/issues"
+  },
+  "homepage": "https://github.com/rubencaro/cardo_client#readme",
   "dependencies": {
-    "axios": "^0.16.1",
-    "bootstrap-vue": "^0.12.1",
-    "store": "^2.0.4",
-    "vue": "^2.2.6",
-    "vue-router": "^2.3.1",
-    "vuex": "^2.2.1"
+    "axios": "^0.17.1",
+    "bootstrap-vue": "^1.4.0",
+    "store": "^2.0.12",
+    "vue": "^2.5.13",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "babel-brunch": "^6.1.1",
+    "babel-eslint": "^8.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-es2016": "^6.24.1",
     "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-3": "^6.24.1",
-    "brunch": "^2.10.9",
+    "brunch": "^2.10.12",
+    "eslint": "^4.15.0",
     "vue-brunch": "^2.0.1"
   }
 }
