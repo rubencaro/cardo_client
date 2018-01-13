@@ -1,9 +1,9 @@
 <template>
   <ul>
-    <li v-for="(value, field) in card">
+    <li v-for="(value, field) in card" :key="field">
       <card-field :value="value"
                   :field="field"
-                  :card_id="card.id"></card-field>
+                  :card_id="card.id"/>
     </li>
   </ul>
 </template>

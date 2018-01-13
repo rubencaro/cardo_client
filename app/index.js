@@ -10,11 +10,11 @@ Vue.use(BootstrapVue)
 
 import Cardo from './Cardo'
 
-const app = new Vue({
+window.cardoClient = new Vue({
   el: '#app',
   store,
-  render: (h) => h(Cardo),
   components: {
     'cardo': Cardo
-  }
+  },
+  render: (h) => h(Cardo),
 })

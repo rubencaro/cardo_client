@@ -1,6 +1,6 @@
 <template>
   <p>
-    <b>{{field}}</b>: {{value}}
+    <b>{{ field }}</b>: {{ value }}
     <button class="close"
             @click="removeField">
       <span aria-hidden="true">&times;</span>

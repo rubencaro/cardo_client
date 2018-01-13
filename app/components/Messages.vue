@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-form-input @keyup.enter="addMessage"/>
-    <div v-for="message in messages">
+    <div v-for="message in messages" :key="messages.indexOf(message)">
       <p>{{ message }}</p>
     </div>
   </div>
