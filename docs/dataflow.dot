@@ -11,9 +11,10 @@ digraph DataFlow {
 
   subgraph cluster_ws2store {
     label="WS connector to Vuex Store"
-    dispatch [label="Dispatch incoming messages\n
+    connect[label="Keep the connection alive"]
+    dispatch[label="Dispatch incoming messages\n
     to the corresponding mutations."]
-    send [label="Serialize each change\n
+    send[label="Serialize each change\n
     based on its origin."]
   }
 
@@ -22,7 +23,7 @@ digraph DataFlow {
     current_list[label="Current list"]
     current_card[label="Current card"]
     search_params[label="Search params"]
-    user [label="User data"]
+    user[label="User data"]
   }
 
   subgraph cluster_form {
@@ -45,14 +46,15 @@ digraph DataFlow {
 
   server -> dispatch
   send -> server
+  server -> connect -> user[dir=back]
 
   edit_card, select_current_card -> current_card [label="mutates"]
-  search_params -> search [dir=back,label="mutates"]
+  search_params -> search[dir=back,label="mutates"]
   dispatch -> current_card, current_list [label="mutates"]
 
-  current_card -> show_card [label="updates"]
-  current_list -> show_list [label="updates"]
-  search_params -> show_search_params [label="updates"]
+  current_card -> show_card[label="updates"]
+  current_list -> show_list[label="updates"]
+  search_params -> show_search_params[label="updates"]
 
-  current_card, search_params -> send [label="fires"]
+  current_card, search_params -> send[label="fires"]
 }

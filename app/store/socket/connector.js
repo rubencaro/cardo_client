@@ -1,4 +1,7 @@
 
+import {dispatch} from './dispatcher'
+import {serialize} from './serializer'
+
 function getSocketURL() {
   let prot = 'ws://'
   if (document.location.protocol === 'https:') prot = 'wss://'
@@ -14,13 +17,9 @@ function setupNewSocket(store) {
 
   store.socket = new WebSocket(getSocketURL())
 
+  // bind the dispatcher to incoming messages
   store.socket.onmessage = (e) => {
-    const txt = document.createTextNode(e.data)
-    const div = document.createElement("div")
-    div.appendChild(txt)
-
-    const first = document.getElementById("messages").firstChild
-    document.getElementById("messages").insertBefore(div, first)
+    dispatch(e)
   }
 }
 
@@ -61,8 +60,8 @@ export default store => {
   window.setTimeout(() => { setupNewSocket(store) }, 100)
   startSocketReconnector(store)
 
+  // bind the serializer to mutations
   store.subscribe((mutation, state) => {
-    // The mutation comes in the format of { type, payload }.
-    // console.log(mutation)
+    serialize(mutation, state, store)
   })
 }

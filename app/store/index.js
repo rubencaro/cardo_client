@@ -44,7 +44,7 @@ const actions = {
   }
 }
 
-import socketConnector from './socket-connector'
+import connector from './socket/connector'
 
 import cards from './modules/cards'
 import alerts from './modules/alerts'
@@ -58,6 +58,6 @@ export default new Vuex.Store({
     cards,
     alerts
   },
-  plugins: [socketConnector],
+  plugins: [connector],
   strict: process.env.NODE_ENV !== 'production'
 })
