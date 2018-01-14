@@ -12,8 +12,4 @@
 # js stuff
 /node_modules
 npm-debug.log
-
-# dynamic front stuff
-/public/*.map
-/public/*.js
-/public/*.css
+/public
