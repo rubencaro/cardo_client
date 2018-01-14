@@ -34,7 +34,7 @@ const state = {
 
 // getters
 const getters = {
-  cards_cards: state => {
+  cards_list: state => {
     return state.cards.cards
   },
   cards_filled_field_names: (state, getters) => {

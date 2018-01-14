@@ -44,8 +44,7 @@ const actions = {
   }
 }
 
-import inbound from './inbound'
-import outbound from './outbound'
+import socketConnector from './socket-connector'
 
 import cards from './modules/cards'
 import alerts from './modules/alerts'
@@ -59,6 +58,6 @@ export default new Vuex.Store({
     cards,
     alerts
   },
-  plugins: [outbound, inbound],
+  plugins: [socketConnector],
   strict: process.env.NODE_ENV !== 'production'
 })

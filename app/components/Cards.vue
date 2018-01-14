@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul>
-      <li v-for="card in cards_cards" :key="cards_cards.indexOf(card)">
+      <li v-for="(card, key) in cards_list" :key="key">
         <card :card="card"/>
       </li>
     </ul>
@@ -17,7 +17,7 @@ export default {
   components: {
     card: Card
   },
-  computed: { ...mapGetters(["cards_cards"]) },
+  computed: { ...mapGetters(['cards_list']) },
 };
 </script>
 
