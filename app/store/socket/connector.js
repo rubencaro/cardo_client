@@ -1,21 +1,12 @@
 
-import {dispatch} from './dispatcher'
-import {serialize} from './serializer'
-
-function getSocketURL() {
-  let prot = 'ws://'
-  if (document.location.protocol === 'https:') prot = 'wss://'
-
-  let host = document.location.host
-  if(host == '') host = 'localhost'
-
-  return prot + host + '/ws'
-}
+import { dispatch } from './dispatcher'
+import { serialize } from './serializer'
+import { config } from '../../config'
 
 function setupNewSocket(store) {
   closeSocket(store.socket)
 
-  store.socket = new WebSocket(getSocketURL())
+  store.socket = new WebSocket(config.socketUrl)
 
   // bind the dispatcher to incoming messages
   store.socket.onmessage = (e) => {
