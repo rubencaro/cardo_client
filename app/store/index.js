@@ -26,6 +26,9 @@ const mutations = {
   },
   addLogLine(state, text) {
     state.logs.push(text)
+    if (state.logs.length > 10) {
+      state.logs.shift()
+    }
   }
 }
 
@@ -34,7 +37,7 @@ const actions = {
     context.commit('addMessage', text)
   },
   addLogLine(context, text) {
-    const formatted = `${Date.now()}: ${text}`
+    const formatted = `${(new Date()).toLocaleString()}: ${text}`
     context.commit('addLogLine', formatted)
   },
   receiveData(context, data) {

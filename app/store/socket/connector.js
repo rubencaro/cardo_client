@@ -10,7 +10,7 @@ function setupNewSocket(store) {
 
   // bind the dispatcher to incoming messages
   store.socket.onmessage = (e) => {
-    dispatch(e)
+    dispatch(store, e)
   }
 }
 
