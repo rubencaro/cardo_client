@@ -1,12 +1,12 @@
-import Vue from 'vue'
-
 // initial state
 const state = {
   alerts: {
-    list: [{
-      level: "danger",
-      msg: "0: Field 'id' cannot be deleted."
-    }]
+    list: [
+      //   {
+      //   level: "danger",
+      //   msg: "0: Field 'id' cannot be deleted."
+      // }
+    ]
   }
 }
 

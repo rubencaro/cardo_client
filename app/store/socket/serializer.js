@@ -4,8 +4,11 @@
 function serialize(mutation, state, store) {
   // The mutation comes in the format of { type, payload }.
   switch (mutation.type) {
-    case "addLogLine":
+    case 'addLogLine':
       store.socket.send('log: ' + mutation.payload)
+      break
+    case 'cards_addCard':
+      store.socket.send('cards_addCard: ' + mutation.payload)
       break
     default:
       console.log(mutation)
