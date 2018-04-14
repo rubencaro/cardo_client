@@ -8,7 +8,7 @@ function serialize(mutation, state, store) {
       store.socket.send('log: ' + mutation.payload)
       break
     case 'cards_addCard':
-      store.socket.send('cards_addCard: ' + mutation.payload)
+      store.socket.send('cards_addCard: ' + JSON.stringify(mutation.payload))
       break
     default:
       console.log(mutation)
