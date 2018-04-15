@@ -4,26 +4,16 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 const state = {
-  messages: [],
   logs: []
 }
 
 const getters = {
-  messages: state => {
-    return state.messages
-  },
-  logs: state => {
+  logs(state) {
     return state.logs
   }
 }
 
 const mutations = {
-  addMessage(state, message) {
-    state.messages.push(message)
-  },
-  checkinMessage(state, message) {
-    state.messages.push(message)
-  },
   addLogLine(state, text) {
     state.logs.push(text)
     if (state.logs.length > 10) {
@@ -33,18 +23,10 @@ const mutations = {
 }
 
 const actions = {
-  addMessage(context, text) {
-    context.commit('addMessage', text)
-  },
   addLogLine(context, text) {
     const formatted = `${(new Date()).toLocaleString()}: ${text}`
     context.commit('addLogLine', formatted)
   },
-  receiveData(context, data) {
-    console.log(`Received: ${data}`)
-    context.commit('checkinMessage', data)
-    context.dispatch('addLogLine', data)
-  }
 }
 
 import connector from './socket/connector'

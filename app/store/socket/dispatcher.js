@@ -1,6 +1,6 @@
 // The dispatching code of the connector
 
-const routes = calcRoutes()
+const routes = buildRoutes()
 
 // This is called for every message coming into the socket
 function dispatch(store, e) {
@@ -14,10 +14,11 @@ function dispatch(store, e) {
   store.dispatch(action, payload)
 }
 
-function calcRoutes() {
+function buildRoutes() {
   let kvs = [
     // here add [route, action] pairs
     ['log', 'addLogLine'],
+    ['cards_upsertCard', 'cards_upsertCard'],
   ];
   return new Map(kvs)
 }

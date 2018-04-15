@@ -11,6 +11,12 @@ const mutations = {
     }
     state.cards.cards[card['id']] = card
   },
+  cards_upsertCard(state, card) {
+    // find by key
+    // if not then find by id
+    // replace card in state
+    state.cards.cards[card['id']] = card
+  },
   cards_upsertFieldOnCard(state, { field, value, card_id }) {
     // needed to keep newly created fields reactive
     // see https://vuejs.org/v2/guide/reactivity.html

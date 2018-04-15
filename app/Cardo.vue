@@ -3,15 +3,12 @@
     <h1>Cardo</h1>
     <alerts/>
     <cards/>
-    <!-- <messages></messages> -->
     <log/>
   </div>
 </template>
 
 <script>
-// import { mapGetters, mapActions } from 'vuex'
 import Log from './components/Log'
-// import Messages from './components/Messages'
 import Cards from './components/Cards'
 import Alerts from './components/Alerts'
 
@@ -20,7 +17,6 @@ export default {
   components: {
     'log': Log,
     'alerts': Alerts,
-    // 'messages': Messages,
     'cards': Cards
   }
 }
