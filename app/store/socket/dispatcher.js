@@ -1,5 +1,4 @@
 // The dispatching code of the connector
-
 const routes = buildRoutes()
 
 // This is called for every message coming into the socket

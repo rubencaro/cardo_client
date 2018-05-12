@@ -2,54 +2,26 @@
 import { dispatch } from './dispatcher'
 import { serialize } from './serializer'
 import { config } from '../../config'
+import { Socket } from 'phoenix'
 
 function setupNewSocket(store) {
-  closeSocket(store.socket)
-
-  store.socket = new WebSocket(config.socketUrl)
+  let socket = new Socket(config.socketUrl, {})
+  socket.connect()
+  store.channel = socket.channel("main:123", {})
 
   // bind the dispatcher to incoming messages
-  store.socket.onmessage = (e) => {
-    dispatch(store, e)
-  }
-}
+  store.channel.on("new_msg", msg => dispatch(store, msg))
 
-function getSocketState(socket) {
-  if (socket) {
-    return socket.readyState
-  } else {
-    return WebSocket.CLOSED
-  }
-}
-
-function closeSocket(socket) {
-  if (socket) {
-    socket.close()
-  }
-}
-
-function startSocketReconnector(store) {
-  // handle reconnection on our own
-  window.clearInterval(store.socketReconnector)
-
-  let lastState = WebSocket.CONNECTING
-  store.socketReconnector = window.setInterval(() => {
-    let state = getSocketState(store.socket)
-    if (state == WebSocket.CLOSED && lastState == WebSocket.CLOSED) {
-      setupNewSocket(store)
-    }
-    else {
-      lastState = state
-    }
-  }, 5000)
+  store.channel.join()
+    .receive("ok", resp => { console.log("Joined successfully", resp) })
+    .receive("error", resp => { console.log("Unable to join", resp) })
 }
 
 export default store => {
   // called when the store is initialized
 
-  // try to connect rightaway, and start the reconnector process
+  // try to connect rightaway, but independently
   window.setTimeout(() => { setupNewSocket(store) }, 100)
-  startSocketReconnector(store)
 
   // bind the serializer to mutations
   store.subscribe((mutation, state) => {
